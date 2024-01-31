@@ -2,7 +2,7 @@
 
 ## Как сдавать ДЗ
 В Pull Request пишите следующую струткуру: HW101_ФИО, так для каждой ДЗ, чтобы Вас было легче проверять
-![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png =250x250)
+<img src="https://i.imgur.com/AQSU4lt.gif" width=250 height=200>
 
 ## Первый семестр
 101. [Основы Swift](/101)
