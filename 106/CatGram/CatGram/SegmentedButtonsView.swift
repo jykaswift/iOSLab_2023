@@ -64,7 +64,7 @@ class SegmentedButtonsView: UIView {
             imageViews.append(imageView)
 
         }
-
+        //
         imageViews[0].tintColor = .black
 
     }
