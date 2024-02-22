@@ -44,6 +44,7 @@ class SegmentedButtonsView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         updateView()
+        print("draw")
     }
 
     // MARK: - create labels

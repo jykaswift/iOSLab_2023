@@ -77,6 +77,19 @@ class ProfileView: UIView {
         return postsSegmentedButtons
     }()
 
+    private let collectionViewDataSource = CollectionViewDataSource()
+
+    private lazy var postsCollectionView: UICollectionView = {
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        collectionViewLayout.scrollDirection = .vertical
+        let postsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        postsCollectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: PostCollectionViewCell.identifier)
+        postsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        postsCollectionView.delegate = self
+        postsCollectionView.dataSource = collectionViewDataSource
+        return postsCollectionView
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -104,7 +117,8 @@ extension ProfileView {
             commonStatisticStackView,
             editProfileButton,
             profileDescriptionLabel,
-            postsSegmentedButtons
+            postsSegmentedButtons,
+            postsCollectionView
         ]
 
         for view in subviews {
@@ -152,9 +166,45 @@ extension ProfileView {
             postsSegmentedButtons.leadingAnchor.constraint(equalTo: leadingAnchor),
             postsSegmentedButtons.trailingAnchor.constraint(equalTo: trailingAnchor),
             postsSegmentedButtons.heightAnchor.constraint(equalToConstant: 40)
+        ])
+
+        NSLayoutConstraint.activate([
+            postsCollectionView.topAnchor.constraint(equalTo: postsSegmentedButtons.bottomAnchor, constant: 2),
+            postsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            postsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            postsCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
 
         ])
 
     }
 
+}
+
+extension ProfileView: UICollectionViewDelegate { }
+
+extension ProfileView: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        let size = (self.bounds.size.width / 3) - 1.34
+        return CGSize(width: size, height: size)
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return 2
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return 2
+    }
 }
