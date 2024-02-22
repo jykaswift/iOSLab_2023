@@ -10,18 +10,8 @@ import UIKit
 
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
-    private lazy var data: [UIImage?] = {
-        var data: [UIImage?] = []
-
-        for i in 1...13 {
-            data.append(UIImage(named: String(i)))
-        }
-
-        return data
-    }()
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        data.count
+        DataManager.shared.syncGetPosts().count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -32,7 +22,10 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
         guard let cell else { fatalError("Can not cast collection cell type")}
 
-        cell.configureCell(with: data[indexPath.row])
+        DataManager.shared.asyncGetPost { posts in
+            let post = posts[indexPath.row]
+            cell.configureCell(with: post.image)
+        }
 
         return cell
     }
