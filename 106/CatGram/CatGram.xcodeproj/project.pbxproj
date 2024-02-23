@@ -68,7 +68,6 @@
 		F90F5BCB2B7BD74C00DBBB9A = {
 			isa = PBXGroup;
 			children = (
-				F9CE6DF72B8933EC00E34BED /* CommentView.swift */,
 				F90F5BD62B7BD74C00DBBB9A /* CatGram */,
 				F90F5BD52B7BD74C00DBBB9A /* Products */,
 			);
@@ -85,6 +84,7 @@
 		F90F5BD62B7BD74C00DBBB9A /* CatGram */ = {
 			isa = PBXGroup;
 			children = (
+				F9CE6DF92B89392D00E34BED /* PostPage */,
 				F93AB52D2B87D13000EEDBC2 /* ProfilePage */,
 				F93AB5202B87C10900EEDBC2 /* Model */,
 				F90F5BD92B7BD74C00DBBB9A /* SceneDelegate.swift */,
@@ -92,10 +92,6 @@
 				F90F5BE02B7BD74D00DBBB9A /* Assets.xcassets */,
 				F90F5BE22B7BD74D00DBBB9A /* LaunchScreen.storyboard */,
 				F90F5BE52B7BD74D00DBBB9A /* Info.plist */,
-				F93AB52E2B87D19C00EEDBC2 /* PostsView.swift */,
-				F93AB52B2B87D12B00EEDBC2 /* PostViewController.swift */,
-				F93AB5302B87D35500EEDBC2 /* PostTableViewCell.swift */,
-				F93AB5322B87D45E00EEDBC2 /* PostTableViewDataSource.swift */,
 			);
 			path = CatGram;
 			sourceTree = "<group>";
@@ -123,6 +119,18 @@
 				F93AB51E2B878AE400EEDBC2 /* PostCollectionViewCell.swift */,
 			);
 			path = ProfilePage;
+			sourceTree = "<group>";
+		};
+		F9CE6DF92B89392D00E34BED /* PostPage */ = {
+			isa = PBXGroup;
+			children = (
+				F93AB52E2B87D19C00EEDBC2 /* PostsView.swift */,
+				F93AB52B2B87D12B00EEDBC2 /* PostViewController.swift */,
+				F93AB5302B87D35500EEDBC2 /* PostTableViewCell.swift */,
+				F9CE6DF72B8933EC00E34BED /* CommentView.swift */,
+				F93AB5322B87D45E00EEDBC2 /* PostTableViewDataSource.swift */,
+			);
+			path = PostPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

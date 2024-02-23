@@ -10,6 +10,7 @@ import UIKit
 class PostsView: UIView {
 
     private let dataSource = PostTableViewDataSource()
+    weak var postsController: PostsControllerProtocol?
 
     private lazy var postsTableView: UITableView = {
         let postsTableView = UITableView()
@@ -30,6 +31,10 @@ class PostsView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    deinit {
+        print("PostView")
+    }
 }
 
 // MARK: Setup UI
@@ -37,8 +42,19 @@ class PostsView: UIView {
 extension PostsView {
     private func setupUI() {
         backgroundColor = .white
+        configureSwipeGestureRecognizer()
         addSubviews()
         setupLayout()
+    }
+
+    private func configureSwipeGestureRecognizer() {
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipedRight))
+        gesture.direction = .right
+        self.addGestureRecognizer(gesture)
+    }
+
+    @objc private func didSwipedRight() {
+        postsController?.dismissController()
     }
 
     private func addSubviews() {
@@ -58,5 +74,12 @@ extension PostsView {
             postsTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
 
+    }
+}
+
+// MARK: Communication with controller
+extension PostsView {
+    func scrollToPostAt(indexPath: IndexPath) {
+        postsTableView.scrollToRow(at: indexPath, at: .middle, animated: false)
     }
 }

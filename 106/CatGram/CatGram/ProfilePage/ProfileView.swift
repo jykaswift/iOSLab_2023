@@ -9,6 +9,9 @@ import UIKit
 
 class ProfileView: UIView {
 
+    weak var profileController: ProfileControllerProtocol?
+    private let collectionViewDataSource = CollectionViewDataSource()
+
     private lazy var profileNameButton = {
         let profileNameButton = UIButton(type: .system)
         profileNameButton.setTitle("jykahey", for: .normal)
@@ -76,8 +79,6 @@ class ProfileView: UIView {
         postsSegmentedButtons.translatesAutoresizingMaskIntoConstraints = false
         return postsSegmentedButtons
     }()
-
-    private let collectionViewDataSource = CollectionViewDataSource()
 
     private lazy var postsCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -180,7 +181,11 @@ extension ProfileView {
 
 }
 
-extension ProfileView: UICollectionViewDelegate { }
+extension ProfileView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        profileController?.didSelectPostAt(indexPath: indexPath)
+    }
+}
 
 extension ProfileView: UICollectionViewDelegateFlowLayout {
     func collectionView(
