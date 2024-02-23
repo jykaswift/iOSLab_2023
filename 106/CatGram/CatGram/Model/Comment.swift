@@ -7,4 +7,7 @@
 
 import Foundation
 
-struct Comment { }
+struct Comment {
+    let user: User
+    let message: String
+}

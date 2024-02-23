@@ -22,10 +22,11 @@
 		F93AB52A2B87C46600EEDBC2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93AB5292B87C46600EEDBC2 /* DataManager.swift */; };
 		F93AB52C2B87D12B00EEDBC2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93AB52B2B87D12B00EEDBC2 /* PostViewController.swift */; };
 		F93AB52F2B87D19C00EEDBC2 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93AB52E2B87D19C00EEDBC2 /* PostsView.swift */; };
-		F93AB5312B87D35500EEDBC2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93AB5302B87D35500EEDBC2 /* TableViewCell.swift */; };
+		F93AB5312B87D35500EEDBC2 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93AB5302B87D35500EEDBC2 /* PostTableViewCell.swift */; };
 		F93AB5332B87D45E00EEDBC2 /* PostTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93AB5322B87D45E00EEDBC2 /* PostTableViewDataSource.swift */; };
 		F96F74BC2B7D37030072700B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96F74BB2B7D37030072700B /* ProfileView.swift */; };
 		F96F74BE2B7D46700072700B /* StatisticStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96F74BD2B7D46700072700B /* StatisticStackView.swift */; };
+		F9CE6DF82B8933EC00E34BED /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CE6DF72B8933EC00E34BED /* CommentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,10 +47,11 @@
 		F93AB5292B87C46600EEDBC2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F93AB52B2B87D12B00EEDBC2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		F93AB52E2B87D19C00EEDBC2 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
-		F93AB5302B87D35500EEDBC2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		F93AB5302B87D35500EEDBC2 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		F93AB5322B87D45E00EEDBC2 /* PostTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewDataSource.swift; sourceTree = "<group>"; };
 		F96F74BB2B7D37030072700B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F96F74BD2B7D46700072700B /* StatisticStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticStackView.swift; sourceTree = "<group>"; };
+		F9CE6DF72B8933EC00E34BED /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		F90F5BCB2B7BD74C00DBBB9A = {
 			isa = PBXGroup;
 			children = (
+				F9CE6DF72B8933EC00E34BED /* CommentView.swift */,
 				F90F5BD62B7BD74C00DBBB9A /* CatGram */,
 				F90F5BD52B7BD74C00DBBB9A /* Products */,
 			);
@@ -91,7 +94,7 @@
 				F90F5BE52B7BD74D00DBBB9A /* Info.plist */,
 				F93AB52E2B87D19C00EEDBC2 /* PostsView.swift */,
 				F93AB52B2B87D12B00EEDBC2 /* PostViewController.swift */,
-				F93AB5302B87D35500EEDBC2 /* TableViewCell.swift */,
+				F93AB5302B87D35500EEDBC2 /* PostTableViewCell.swift */,
 				F93AB5322B87D45E00EEDBC2 /* PostTableViewDataSource.swift */,
 			);
 			path = CatGram;
@@ -215,8 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9CE6DF82B8933EC00E34BED /* CommentView.swift in Sources */,
 				F96F74BC2B7D37030072700B /* ProfileView.swift in Sources */,
-				F93AB5312B87D35500EEDBC2 /* TableViewCell.swift in Sources */,
+				F93AB5312B87D35500EEDBC2 /* PostTableViewCell.swift in Sources */,
 				F93AB5332B87D45E00EEDBC2 /* PostTableViewDataSource.swift in Sources */,
 				F90F5BDC2B7BD74C00DBBB9A /* ProfileController.swift in Sources */,
 				F93AB52C2B87D12B00EEDBC2 /* PostViewController.swift in Sources */,

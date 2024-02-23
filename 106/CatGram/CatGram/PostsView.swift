@@ -18,6 +18,7 @@ class PostsView: UIView {
         postsTableView.translatesAutoresizingMaskIntoConstraints = false
         postsTableView.dataSource = dataSource
         postsTableView.rowHeight = UITableView.automaticDimension
+        postsTableView.allowsSelection = false
         return postsTableView
     }()
 

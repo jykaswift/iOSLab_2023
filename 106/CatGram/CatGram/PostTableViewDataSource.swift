@@ -22,5 +22,4 @@ class PostTableViewDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
-
 }

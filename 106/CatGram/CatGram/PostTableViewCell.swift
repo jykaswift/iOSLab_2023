@@ -37,6 +37,15 @@ class PostTableViewCell: UITableViewCell {
         return cityLabel
     }()
 
+    private lazy var dateLabel: UILabel = {
+        let dateLabel = UILabel()
+        dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.text = "1 January 2022"
+        dateLabel.textColor = .gray
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        return dateLabel
+    }()
+
     private lazy var postImageView: UIImageView = {
         let postImageView = UIImageView()
         postImageView.contentMode = .scaleToFill
@@ -51,8 +60,18 @@ class PostTableViewCell: UITableViewCell {
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         likeButton.tintColor = .black
         likeButton.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return likeButton
+    }()
+
+    private lazy var commentsStackView: UIStackView = {
+        let commentsStackView = UIStackView()
+        commentsStackView.translatesAutoresizingMaskIntoConstraints = false
+        commentsStackView.axis = .vertical
+        commentsStackView.distribution = .fill
+        commentsStackView.alignment = .fill
+        commentsStackView.spacing = -10
+        return commentsStackView
     }()
 
     func setupCell(with post: Post) {
@@ -60,9 +79,27 @@ class PostTableViewCell: UITableViewCell {
         postImageView.image = post.image
         nicknameLabel.text = post.owner.nickname
         cityLabel.text = post.city
+        setupComments(with: post.comments)
+        setupDate(post.date)
         setupUI()
     }
+
+}
+
+extension PostTableViewCell {
     
+    private func setupDate(_ date: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMMM yyyy"
+        dateLabel.text = dateFormatter.string(from: date)
+    }
+
+    private func setupComments(with comments: [Comment]) {
+        for comment in comments {
+            commentsStackView.addArrangedSubview(CommentView(comment: comment))
+        }
+    }
+
     private func setupUI() {
         addSubviews()
         setupLayout()
@@ -74,7 +111,9 @@ class PostTableViewCell: UITableViewCell {
             nicknameLabel,
             cityLabel,
             postImageView,
-            likeButton
+            likeButton,
+            commentsStackView,
+            dateLabel
         ]
 
         for view in views {
@@ -85,10 +124,8 @@ class PostTableViewCell: UITableViewCell {
     private func setupLayout() {
         let margin: CGFloat = 10
 
-        contentView.layer.borderColor = UIColor.red.cgColor
-        contentView.layer.borderWidth = 1
         NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
             avatarImageView.heightAnchor.constraint(equalToConstant: 32),
             avatarImageView.widthAnchor.constraint(equalToConstant: 32)
@@ -105,15 +142,43 @@ class PostTableViewCell: UITableViewCell {
             postImageView.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: margin),
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
+            postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor)
         ])
-        
+
         NSLayoutConstraint.activate([
             likeButton.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: margin),
-            likeButton.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
-            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            likeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin - 1)
+
+        ])
+
+        NSLayoutConstraint.activate([
+            commentsStackView.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
+            commentsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
+            commentsStackView.topAnchor.constraint(equalTo: likeButton.bottomAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: commentsStackView.bottomAnchor, constant: 5),
+            dateLabel.leadingAnchor.constraint(equalTo: commentsStackView.leadingAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: commentsStackView.trailingAnchor),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
 
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        commentsStackView.removeAllArrangedSubviews()
+    }
+
+}
+
+extension UIStackView {
+    func removeAllArrangedSubviews() {
+        arrangedSubviews.forEach {
+            self.removeArrangedSubview($0)
+            NSLayoutConstraint.deactivate($0.constraints)
+            $0.removeFromSuperview()
+        }
+    }
 }

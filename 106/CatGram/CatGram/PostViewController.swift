@@ -14,11 +14,4 @@ class PostViewController: UIViewController {
         view = postsView
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-
-
-
 }
