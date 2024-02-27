@@ -12,4 +12,7 @@ protocol DataManagerProtocol {
     func syncGetPosts() -> [Post]
     func asyncGetPost(completion: @escaping ([Post]) -> Void) 
 
+    func syncDeletePost(with postId: UUID)
+    func asyncDeletePost(with postId: UUID, completion: @escaping () -> Void)
+
 }

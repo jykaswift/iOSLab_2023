@@ -67,4 +67,12 @@ class DataManager: DataManagerProtocol {
         }
 
     }
+
+    func syncDeletePost(with postId: UUID) {
+        <#code#>
+    }
+
+    func asyncDeletePost(with postId: UUID, completion: @escaping () -> Void) {
+        <#code#>
+    }
 }

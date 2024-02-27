@@ -11,6 +11,8 @@ class PostTableViewCell: UITableViewCell {
 
     static let identifier = "Post"
 
+    private var postId: UUID!
+
     private lazy var avatarImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.contentMode = .scaleAspectFill
@@ -27,6 +29,25 @@ class PostTableViewCell: UITableViewCell {
         nicknameLabel.text = "city"
         nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nicknameLabel
+    }()
+
+    private lazy var optionButton: UIButton = {
+        let optionButton = UIButton(type: .system)
+        optionButton.setImage(
+            UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(scale: .large)),
+            for: .normal
+        )
+        optionButton.tintColor = .black
+        optionButton.showsMenuAsPrimaryAction = true
+
+        let removeAction = UIAction(title: "Delete") { _ in
+            print("hello")
+        }
+        optionButton.menu = UIMenu(title: "Options", children: [removeAction])
+
+        optionButton.translatesAutoresizingMaskIntoConstraints = false
+
+        return optionButton
     }()
 
     private lazy var cityLabel: UILabel = {
@@ -80,6 +101,7 @@ class PostTableViewCell: UITableViewCell {
         nicknameLabel.text = post.owner.nickname
         cityLabel.text = post.city
         setupComments(with: post.comments)
+        postId = post.id
         setupDate(post.date)
         setupUI()
     }
@@ -113,7 +135,8 @@ extension PostTableViewCell {
             postImageView,
             likeButton,
             commentsStackView,
-            dateLabel
+            dateLabel,
+            optionButton
         ]
 
         for view in views {
@@ -136,6 +159,11 @@ extension PostTableViewCell {
             nicknameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
             cityLabel.leadingAnchor.constraint(equalTo: nicknameLabel.leadingAnchor),
             cityLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 2)
+        ])
+
+        NSLayoutConstraint.activate([
+            optionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -margin),
+            optionButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor)
         ])
 
         NSLayoutConstraint.activate([
