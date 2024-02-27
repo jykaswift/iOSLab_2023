@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PostAlertControllerDelegate: AnyObject {
+    func showDeleteAlert(with postId: UUID)
+}
+
 class PostsView: UIView {
 
     private let dataSource = PostTableViewDataSource()
@@ -80,6 +84,16 @@ extension PostsView {
 // MARK: Communication with controller
 extension PostsView {
     func scrollToPostAt(indexPath: IndexPath) {
-        postsTableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+        postsTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+    }
+
+    func reloadData() {
+        postsTableView.reloadData()
+    }
+}
+
+extension PostsView: PostAlertControllerDelegate {
+    func showDeleteAlert(with postId: UUID) {
+        postsController?.showDeleteAlert(with: postId)
     }
 }

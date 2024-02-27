@@ -69,10 +69,21 @@ class DataManager: DataManagerProtocol {
     }
 
     func syncDeletePost(with postId: UUID) {
-        <#code#>
+        data.removeAll { post in
+            post.id == postId
+        }
     }
 
     func asyncDeletePost(with postId: UUID, completion: @escaping () -> Void) {
-        <#code#>
+        let dispatchQueue = DispatchQueue(label: "Something", attributes: .concurrent)
+
+        let task = DispatchWorkItem {
+            self.syncDeletePost(with: postId)
+        }
+        dispatchQueue.async(execute: task)
+
+        task.notify(queue: .main) {
+            completion()
+        }
     }
 }

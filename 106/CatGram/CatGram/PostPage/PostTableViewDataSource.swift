@@ -17,6 +17,7 @@ class PostTableViewDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell
         guard let cell else { fatalError("Can not cast table view cell type") }
         let post = DataManager.shared.syncGetPosts()[indexPath.row]
+        cell.delegate = tableView.superview as? PostAlertControllerDelegate
         cell.setupCell(with: post)
         
         return cell

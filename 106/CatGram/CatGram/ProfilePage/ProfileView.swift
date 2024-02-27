@@ -213,3 +213,9 @@ extension ProfileView: UICollectionViewDelegateFlowLayout {
         return 2
     }
 }
+// MARK: Communication with controller
+extension ProfileView {
+    func reloadCollectionData() {
+        postsCollectionView.reloadData()
+    }
+}

@@ -28,7 +28,15 @@ extension ProfileController: ProfileControllerProtocol {
         postController.modalPresentationStyle = .fullScreen
         postController.modalTransitionStyle = .crossDissolve
         postController.startIndexPath = indexPath
+        postController.delegate = self
         present(postController, animated: true)
     }
 
+}
+
+extension ProfileController: PostControllerDelegate {
+    func reloadCollectionData() {
+        profileView.reloadCollectionData()
+    }
+    
 }

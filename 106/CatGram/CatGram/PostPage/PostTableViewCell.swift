@@ -12,6 +12,9 @@ class PostTableViewCell: UITableViewCell {
     static let identifier = "Post"
 
     private var postId: UUID!
+    weak var delegate: PostAlertControllerDelegate?
+
+    private var isFirstInit = true
 
     private lazy var avatarImageView = {
         let avatarImageView = UIImageView()
@@ -40,8 +43,9 @@ class PostTableViewCell: UITableViewCell {
         optionButton.tintColor = .black
         optionButton.showsMenuAsPrimaryAction = true
 
-        let removeAction = UIAction(title: "Delete") { _ in
-            print("hello")
+        let removeAction = UIAction(title: "Delete") { [weak self] _ in
+            guard let self else { return }
+            self.delegate?.showDeleteAlert(with: self.postId)
         }
         optionButton.menu = UIMenu(title: "Options", children: [removeAction])
 
@@ -100,10 +104,14 @@ class PostTableViewCell: UITableViewCell {
         postImageView.image = post.image
         nicknameLabel.text = post.owner.nickname
         cityLabel.text = post.city
-        setupComments(with: post.comments)
+        if isFirstInit {
+            setupComments(with: post.comments)
+            isFirstInit = false
+        }
         postId = post.id
         setupDate(post.date)
         setupUI()
+
     }
 
 }
@@ -162,7 +170,7 @@ extension PostTableViewCell {
         ])
 
         NSLayoutConstraint.activate([
-            optionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -margin),
+            optionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
             optionButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor)
         ])
 
@@ -193,20 +201,6 @@ extension PostTableViewCell {
         ])
 
     }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        commentsStackView.removeAllArrangedSubviews()
-    }
-
 }
 
-extension UIStackView {
-    func removeAllArrangedSubviews() {
-        arrangedSubviews.forEach {
-            self.removeArrangedSubview($0)
-            NSLayoutConstraint.deactivate($0.constraints)
-            $0.removeFromSuperview()
-        }
-    }
-}
+
